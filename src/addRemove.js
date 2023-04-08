@@ -67,7 +67,6 @@ class TodoList {
           });
         }
 
-   
       resetIndex = () => {
         let initialIndex = 1;
         this.tasks.forEach((task) => {
