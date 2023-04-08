@@ -55,6 +55,34 @@ class TodoList {
             list.innerHTML += li;
           });
 
+
+
+        const checkbox = document.querySelectorAll('.checkbox');
+
+        checkbox.forEach((check) => {
+          check.addEventListener('change', () => {
+            if (check.checked) {
+              check.parentElement.classList.add('complete');
+              this.tasks = this.tasks.map((task) => {
+                if (task.id === parseInt(check.parentElement.id, 20)) {
+                  task.completed = check.checked;
+                }
+                return task;
+              });
+              this.setStorage();
+            } else {
+              check.parentElement.classList.remove('complete');
+              this.tasks = this.tasks.map((task) => {
+                if (task.id === parseInt(check.parentElement.id, 20)) {
+                  task.completed = false;
+                }
+                return task;
+              });
+              this.setStorage();
+            }
+          });
+        });
+
           const textArea = document.querySelectorAll('.text-area');
           textArea.forEach((area) => {
             area.addEventListener('blur', () => {
@@ -79,6 +107,10 @@ class TodoList {
         this.tasks.forEach((task) => {
           task.completed = true;
         });
+      };
+
+      cleanCompleted = () => {
+        this.tasks = this.tasks.filter((task) => task.completed === false);
       };
 
       /* These are two methods of the `TodoList` class that are used to store and retrieve the tasks data
