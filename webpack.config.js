@@ -1,41 +1,61 @@
+// Generated using webpack-cli https://github.com/webpack/webpack-cli
+
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const WorkboxWebpackPlugin = require('workbox-webpack-plugin');
 
-module.exports = {
-  mode: 'development',
-  entry: {
-    index: './src/script.js',
+const isProduction = process.env.NODE_ENV === 'production';
+
+const stylesHandler = MiniCssExtractPlugin.loader;
+
+const config = {
+  entry: './src/script.js',
+  output: {
+    path: path.resolve(__dirname, 'dist'),
   },
-
   devServer: {
-    static: './dist',
+    open: true,
+    host: 'localhost',
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: 'Output Management',
-      template: './src/index.html',
+      template: 'index.html',
     }),
-  ],
-  output: {
-    filename: '[name].bundle.js',
-    path: path.resolve(__dirname, 'dist'),
-    clean: true,
-    publicPath: '/',
-  },
 
-  optimization: {
-    runtimeChunk: 'single',
-  },
+    new MiniCssExtractPlugin(),
+
+    // Add your plugins here
+    // Learn more about plugins from https://webpack.js.org/configuration/plugins/
+  ],
   module: {
     rules: [
       {
-        test: /\.css$/i,
-        use: ['style-loader', 'css-loader'],
+        test: /\.(js|jsx)$/i,
+        loader: 'babel-loader',
       },
       {
-        test: /\.(png|svg|jpg|jpeg|gif)$/i,
-        type: 'asset/resource', // Process image files as assets
+        test: /\.css$/i,
+        use: [stylesHandler, 'css-loader', 'postcss-loader'],
       },
+      {
+        test: /\.(eot|svg|ttf|woff|woff2|png|jpg|gif)$/i,
+        type: 'asset',
+      },
+
+      // Add your rules for custom modules here
+      // Learn more about loaders from https://webpack.js.org/loaders/
     ],
   },
+};
+
+module.exports = () => {
+  if (isProduction) {
+    config.mode = 'production';
+
+    config.plugins.push(new WorkboxWebpackPlugin.GenerateSW());
+  } else {
+    config.mode = 'development';
+  }
+  return config;
 };
