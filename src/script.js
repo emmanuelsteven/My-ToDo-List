@@ -1,50 +1,40 @@
 import './style.css';
-
-const toDoList = [
-  {
-    index: '1',
-    description: 'Attend stand-up meeting by 5pm',
-    completed: 'false',
-  },
-
-  {
-    index: '1',
-    description: 'see car dealer',
-    completed: 'false',
-  },
-
-  {
-    index: '1',
-    description: 'Read Eloquent JavaScript',
-    completed: 'false',
-  },
-
-  {
-    index: '1',
-    description: 'Mark text script',
-    completed: 'false',
-  },
-
-];
+import TodoList from './addRemove.js';
 
 const taskList = document.querySelector('.task-container');
+const addTodo = document.querySelector('form');
+const description = document.querySelector('#add-task');
+const clearAll = document.querySelector('.completed');
 
-taskList.innerHTML = '';
+const todoList = new TodoList();
+clearAll.addEventListener('click', () => {
+  todoList.cleanCompleted();
+  todoList.setStorage();
+  todoList.displayToDo(taskList);
+});
 
-const loadList = () => {
-  toDoList.forEach((todolist) => {
-    const li = document.createElement('li');
-    li.classList.add('new-list');
-    li.innerHTML = `
-        <input type="checkbox">
-        <label>${todolist.description}</label>
-        <span class="material-symbols-outlined">more_vert</span>
-        `;
+addTodo.addEventListener('submit', (e) => {
+  e.preventDefault();
+  if (description.value.trim()) {
+    todoList.addTask(description.value);
+    todoList.setStorage();
+    todoList.resetIndex();
+    todoList.displayToDo(taskList);
+    addTodo.reset();
+  }
+});
 
-    taskList.append(li);
-  });
-};
+document.addEventListener('click', (e) => {
+  if (e.target && e.target.classList.contains('delete')) {
+    const id = parseInt(e.target.parentElement.id, 20);
+    todoList.removeList(id);
+    todoList.resetIndex();
+    todoList.setStorage();
+    todoList.displayToDo(taskList);
+  }
+});
 
-window.onload = () => {
-  loadList();
-};
+document.addEventListener('DOMContentLoaded', () => {
+  todoList.getStorage();
+  todoList.displayToDo(taskList);
+});
