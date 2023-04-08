@@ -4,12 +4,6 @@ class TodoList {
     this.tasks = [];
   }
 
-  /* The `addTask` method is a function of the `TodoList` class that takes a `description`
-      parameter as input. It creates a new task object with properties `id`, `description`, and
-      `completed`, where `id` is set to the length of the `tasks` array plus 1, `description` is set
-      to the `description` parameter passed to the method, and `completed` is set to `false`. The
-      new task object is then added to the `tasks` array using the `push()` method. This method
-      essentially adds a new task to the list of tasks in the `TodoList` object. */
         addTask = (description) => {
           const completed = false;
           const id = this.tasks.length + 1;
@@ -21,11 +15,6 @@ class TodoList {
           this.tasks.push(task);
         };
 
-        /* The `removeList` method is a function of the `TodoList` class that takes an `id` parameter as
-      input. It iterates through the `tasks` array and finds the task with the same `id` as the
-      input parameter. Once it finds the task, it removes it from the `tasks` array using the
-      `splice()` method. This method essentially removes a task from the list of tasks in the
-      `TodoList` object. */
         removeList = (id) => {
           this.tasks.forEach((task) => {
             if (task.id === id) {
