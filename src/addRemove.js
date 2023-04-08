@@ -55,33 +55,31 @@ class TodoList {
             list.innerHTML += li;
           });
 
+          const checkbox = document.querySelectorAll('.checkbox');
 
-
-        const checkbox = document.querySelectorAll('.checkbox');
-
-        checkbox.forEach((check) => {
-          check.addEventListener('change', () => {
-            if (check.checked) {
-              check.parentElement.classList.add('complete');
-              this.tasks = this.tasks.map((task) => {
-                if (task.id === parseInt(check.parentElement.id, 20)) {
-                  task.completed = check.checked;
-                }
-                return task;
-              });
-              this.setStorage();
-            } else {
-              check.parentElement.classList.remove('complete');
-              this.tasks = this.tasks.map((task) => {
-                if (task.id === parseInt(check.parentElement.id, 20)) {
-                  task.completed = false;
-                }
-                return task;
-              });
-              this.setStorage();
-            }
+          checkbox.forEach((check) => {
+            check.addEventListener('change', () => {
+              if (check.checked) {
+                check.parentElement.classList.add('complete');
+                this.tasks = this.tasks.map((task) => {
+                  if (task.id === parseInt(check.parentElement.id, 20)) {
+                    task.completed = check.checked;
+                  }
+                  return task;
+                });
+                this.setStorage();
+              } else {
+                check.parentElement.classList.remove('complete');
+                this.tasks = this.tasks.map((task) => {
+                  if (task.id === parseInt(check.parentElement.id, 20)) {
+                    task.completed = false;
+                  }
+                  return task;
+                });
+                this.setStorage();
+              }
+            });
           });
-        });
 
           const textArea = document.querySelectorAll('.text-area');
           textArea.forEach((area) => {
