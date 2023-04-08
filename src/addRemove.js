@@ -71,21 +71,15 @@ class TodoList {
               }
             });
           });
-      
-          
 
           const textArea = document.querySelectorAll('.text-area');
           textArea.forEach((area) => {
-            area.addEventListener('click', () => {
-              const result = this.tasks.filter((task) => task.id === Number(area.id));
-              this.tasks[result[0].id - 1].description = area.value;
-              if(!textArea){
-                return
-              } else{
-                this.tasks.push([result[0].id -1].description);
+            area.addEventListener('blur', () => {
+              const taskIndex = this.tasks.findIndex((task) => task.id === Number(area.id));
+              if (taskIndex !== -1) {
+                this.tasks[taskIndex].description = area.value;
+                this.setStorage();
               }
-              
-             this.setStorage();
             });
           });
         }
@@ -97,7 +91,7 @@ class TodoList {
           initialIndex += 1;
         });
       };
-   
+
       showCompleted = () => {
         this.tasks.forEach((task) => {
           task.completed = true;
@@ -119,7 +113,6 @@ class TodoList {
         }
       };
 
-// const editedTask = document.querySelectorAll('.editTask');
-      
+  // const editedTask = document.querySelectorAll('.editTask');
 }
 export default TodoList;

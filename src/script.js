@@ -33,5 +33,3 @@ document.addEventListener('DOMContentLoaded', () => {
   todoList.getStorage();
   todoList.displayToDo(taskList);
 });
-
-
