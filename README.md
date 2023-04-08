@@ -1,6 +1,6 @@
-<a name="readme-top"></a>
+# 🚀 Welcome to your new awesome project!
 
-<div align="center">
+This project has been created using **webpack-cli**, you can now run
 
   <h1><b>My ToDoList Structure</b></h1>
 
@@ -89,69 +89,13 @@ sudo apt install git-all
 or
 npm install
 ```
-
-### Setup
-
-Clone this repository to your desired folder:
-
-```sh
-  cd my-folder
-  git clone git@github.com:emmanuelsteven/My-ToDo-List.git
+npm run build
 ```
 
-### Usage
+or
 
-To run the project, execute the following command:
-
-```sh
-  Open index.html in browser
-  or
-  open with Live server in Vscode
+```
+yarn build
 ```
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<!-- AUTHORS -->
-
-## 👥 Authors <a name="authors"></a>
-
-👤 **Steven Emmanuel**
-
-- GitHub: [@emmanuelsteven](https://github.com/emmanuelsteven)
-
-<!-- FUTURE FEATURES -->
-
-## 🔭 Future Features <a name="future-features"></a>
-
-- [ ] **[Rearrange lists]**
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<!-- CONTRIBUTING -->
-
-## 🤝 Contributing <a name="contributing"></a>
-
-Contributions, issues, and feature requests are welcome!
-
-Feel free to check the [issues page](https://github.com/emmanuelsteven/To-do-list/issues).
-
-<!-- SUPPORT -->
-
-## ⭐️ Show your support <a name="support"></a>
-
-If you like this project show some love by commenting
-
-<!-- ACKNOWLEDGEMENTS -->
-
-## 🙏 Acknowledgments <a name="acknowledgements"></a>
-
-I would like to thank Microverse staff for their support
-i would like to acknowlegde my friends Spencer okereye, Lawerence Amoafa,Bawa  collins , and yang ,for their immense support.
-
-<!-- LICENSE -->
-
-## 📝 License <a name="license"></a>
-
-This project is [MIT](https://github.com/emmanuelsteven/My-ToDo-List/blob/main/LICENSE) licensed.
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+to bundle your application
