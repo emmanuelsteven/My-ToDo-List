@@ -55,26 +55,19 @@ class TodoList {
             list.innerHTML += li;
           });
 
-          /* This code is selecting all the HTML elements with class name "text-area" and adding a click
-        event listener to each of them. When a user clicks on a text area, the function inside the
-        event listener is executed. It filters the tasks array to find the task with the same id as
-        the clicked text area, updates the description of that task with the new value of the text
-        area, and then calls the setStorage() method to update the local storage with the new task
-        description. */
           const textArea = document.querySelectorAll('.text-area');
           textArea.forEach((area) => {
-            area.addEventListener('click', () => {
-              const result = this.tasks.filter((task) => task.id === Number(area.id));
-              this.tasks[result[0].id - 1].description = area.value;
-              this.setStorage();
+            area.addEventListener('blur', () => {
+              const taskIndex = this.tasks.findIndex((task) => task.id === Number(area.id));
+              if (taskIndex !== -1) {
+                this.tasks[taskIndex].description = area.value;
+                this.setStorage();
+              }
             });
           });
         }
 
-        /* The `resetIndex` method is a function that iterates through the `tasks` array and resets the
-    `id` property of each task to a new index starting from 1. This is useful when tasks have been
-    deleted or rearranged, as it ensures that the `id` property of each task is always sequential
-    and starts from 1. */
+   
       resetIndex = () => {
         let initialIndex = 1;
         this.tasks.forEach((task) => {
@@ -83,9 +76,6 @@ class TodoList {
         });
       };
 
-      /* The `showCompleted` method is a function of the `TodoList` class that sets the `completed`
-      property of all tasks in the `tasks` array to `true`. This method can be used to mark all
-      tasks as completed at once. */
       showCompleted = () => {
         this.tasks.forEach((task) => {
           task.completed = true;
